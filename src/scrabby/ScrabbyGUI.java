@@ -18,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 import java.util.*;
 
@@ -29,6 +30,10 @@ public class ScrabbyGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private ScrabbyLogik sl;
+	private JLabel lblPunkte;
+	private JCheckBox cbBehalten;
+	
+	
 	
 	
 	
@@ -41,6 +46,8 @@ public class ScrabbyGUI extends JFrame {
 	
 	
 	public static void main(String[] args) {
+		
+
 				
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -71,6 +78,8 @@ public class ScrabbyGUI extends JFrame {
 	
 	
 	public ScrabbyGUI() {
+		
+		
 		
 
 		
@@ -107,6 +116,7 @@ public class ScrabbyGUI extends JFrame {
 				
 				String bst = Character.toString(e.getKeyChar());
 				bst = bst.toUpperCase();
+				System.out.print(bst);
 				
 				// if (button1.getText() == bst){
 					
@@ -131,8 +141,6 @@ public class ScrabbyGUI extends JFrame {
 		button1.setFont(new Font("Century Gothic", Font.PLAIN, 19));
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				lblWort.setText("Bitch Lasagna!");
 				wort = wort + button1.getText();
 				clicks ++;
 				
@@ -258,7 +266,7 @@ public class ScrabbyGUI extends JFrame {
 		contentPane.add(button7);
 		
 		
-		JLabel lblPunkte = new JLabel("Punkte:");
+		lblPunkte = new JLabel("Punkte:");
 		lblPunkte.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		lblPunkte.setBounds(10, 187, 211, 42);
 		contentPane.add(lblPunkte);
@@ -272,19 +280,13 @@ public class ScrabbyGUI extends JFrame {
 		JButton btnAuswerten = new JButton("Wort auswerten");
 		btnAuswerten.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				sl.punkteBerechen1(wort);
-				
-				//lblPunkte.setText("Punkte: " + wort);
-				
-
-				
-				 
-				
-				
+				klickAuswerten();
 				
 			}
 		});
+		
+		
+		
 		btnAuswerten.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		btnAuswerten.setBackground(new Color(46, 204, 113));
 		btnAuswerten.setBounds(10, 134, 211, 42);
@@ -294,6 +296,38 @@ public class ScrabbyGUI extends JFrame {
 		btnNeu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				klickNeu()
+				
+				
+				
+				
+				/*
+				if(cbBehalten.isSelected() == true) {
+					
+					String gespeichert = wort;
+					
+					char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+					StringBuilder sb = new StringBuilder();
+					Random random = new Random();
+					
+					for (int q = 0; q <= 10; q++) {
+						
+						
+						for (int i = 0; i < 20; i++) {
+						    char c = chars[random.nextInt(chars.length)];
+						    sb.append(c);
+						}
+						
+					}
+						
+						
+					
+			
+								
+					}
+							
+						
+							
 				wort = "";
 				textField.setText(wort);
 				
@@ -339,6 +373,10 @@ public class ScrabbyGUI extends JFrame {
 				
 			}
 		});
+		
+		*/
+		
+		
 		btnNeu.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		btnNeu.setBackground(new Color(52, 152, 219));
 		btnNeu.setBounds(227, 187, 211, 42);
@@ -361,12 +399,16 @@ public class ScrabbyGUI extends JFrame {
 				
 			}
 		});
+		
+	
+		
+		
 		btnLoeschen.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		btnLoeschen.setBackground(new Color(231, 76, 60));
 		btnLoeschen.setBounds(226, 134, 211, 42);
 		contentPane.add(btnLoeschen);
 		
-		JCheckBox cbBehalten = new JCheckBox("behalten");
+		cbBehalten = new JCheckBox("behalten");
 		cbBehalten.setBackground(new Color (149, 165, 166));
 		cbBehalten.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		cbBehalten.setBounds(227, 236, 97, 23);
@@ -386,4 +428,92 @@ public class ScrabbyGUI extends JFrame {
 		btnAuswerten.setFocusPainted(false);
 		
 	}
+	
+	
+	
+	private void klickAuswerten(){
+		int punkte = sl.wortAuswerten(wort);
+		lblPunkte.setText("Punkte: " + Integer.toString(punkte));
+		
+	}
+	
+	private boolean gibBehalten(){
+
+		return cbBehalten.isSelected();
+		
+	}
+	
+	
+	private int gibAnzahlNeu(){
+		int anz = 0;
+		
+		if (this.gibBehalten() == false) {
+			anz= 7;
+		} else {
+			 anz = (button1.isEnabled())?anz:anz+1;
+			 anz = (button2.isEnabled())?anz:anz+1;
+			 anz = (button3.isEnabled())?anz:anz+1;
+			 anz = (button4.isEnabled())?anz:anz+1;
+			 anz = (button5.isEnabled())?anz:anz+1;
+			 anz = (button6.isEnabled())?anz:anz+1;
+			 anz = (button7.isEnabled())?anz:anz+1;
+			 
+		}
+		
+		return anz;
+		
+	}
+	
+	private void zeigeBuchstaben() {
+		
+		if (this.gibBehalten() == false) {
+			
+		button1.setText(Character.toString(bstA[0]));
+		button2.setText(Character.toString(bstA[1]));
+		button3.setText(Character.toString(bstA[2]));
+		button4.setText(Character.toString(bstA[3]));
+		button5.setText(Character.toString(bstA[4]));
+		button6.setText(Character.toString(bstA[5]));
+		button7.setText(Character.toString(bstA[6]));
+		button1.setText(Character.toString(bstA[7]));
+		} else {
+			int numset = 0;
+			if (button1.isEnabled() == false ) {
+				button1.setText(bstA[numset++]);
+			}
+			if (button2.isEnabled() == false ) {
+				button2.setText(bstA[numset++]);
+			}
+			if (button3.isEnabled() == false ) {
+				button3.setText(bstA[numset++]);
+			}
+			if (button4.isEnabled() == false ) {
+				button4.setText(bstA[numset++]);
+			}
+			if (button5.isEnabled() == false ) {
+				button5.setText(bstA[numset++]);
+			}
+			if (button6.isEnabled() == false ) {
+				button6.setText(bstA[numset++]);
+			}
+			if (button7.isEnabled() == false ) {
+				button7.setText(bstA[numset++]);
+			}
+		}
+		
+		this.loescheText();
+	}
+		
+		
+	}
+	
+	private void klickNeu() {
+	
+		
+	
+	}
+	
+	
+	
+	
 }

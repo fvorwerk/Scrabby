@@ -1,5 +1,8 @@
 package scrabby;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class ScrabbyLogik {
 
 	private ScrabbyBuchstaben sb;
@@ -15,6 +18,15 @@ public class ScrabbyLogik {
 		
 	}
 	
+	
+	public int wortAuswerten(String wort){
+		
+		int punkte = sb.punkteBerechen(wort);
+		return punkte;
+		
+	}
+	
+	
 	public static void main (String[] args){
 	
 		new ScrabbyLogik();
@@ -22,18 +34,39 @@ public class ScrabbyLogik {
 		
 	}
 	
+	public ArrayList<Character> neuesArray(){
+		
+		
+		
+	}
 	
-
-
-	public String punkteBerechen1(String wort) {
+	
+	public ArrayList<Character> erstelleArray(){
+			
+			
+			
+	}
+	
+	public String neuBuchstaben() {
 		
-		sb.punkteBerechen(wort);
+		char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
 		
-		return wort;
+		for (int q = 0; q <= 10; q++) {
+			
+			
+			for (int i = 0; i < 20; i++) {
+			    char c = chars[random.nextInt(chars.length)];
+			    sb.append(c);
+			}
+			
+		}
 		
 		
-
-
-}
+		String output = sb.toString();
+		return output;
+		
+	}
 
 }

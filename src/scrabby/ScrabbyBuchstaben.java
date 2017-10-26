@@ -1,6 +1,6 @@
 package scrabby;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class ScrabbyBuchstaben {
 	
@@ -20,6 +20,8 @@ public class ScrabbyBuchstaben {
 		
 	private ArrayList<Character> vorrat;
 	
+	private Random rnd = new Random();
+	
 	// todo: Standardkonstruktor anlegen
 	// dieser soll die Methode initVorrat aufrufen, um die ArrayList anzulegen
 	
@@ -37,6 +39,24 @@ public class ScrabbyBuchstaben {
 		{
 			vorrat.add(new Character((char) (steincodes[i]+65)));
 		}
+		return;
+	}
+	
+	
+	private char gibBuchstaben() {
+		
+		if(vorrat.size() > 0 ){
+			int idx = rnd.nextInt(vorrat.size());
+			char bst = vorrat.remove(idx).charValue();
+			return bst;
+			
+		}
+		else {
+			return ' ';
+		}
+		
+		
+		
 	}
 	
 	
@@ -61,6 +81,8 @@ public class ScrabbyBuchstaben {
 		return punkte;
 		
 	}
+	
+	public 
 		
 	
 		
